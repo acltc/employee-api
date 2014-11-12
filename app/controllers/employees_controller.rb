@@ -1,9 +1,11 @@
 class EmployeesController < ApplicationController
-  respond_to :xml, :json
+
+  def index
+    @employees = Employee.all
+  end
 
   def show
-    @employee = Employee.find_by(id: params[:id])
-    respond_with(@employee)
+    @employee = Employee.find_by(id: params[:id]) 
   end
   
 end
