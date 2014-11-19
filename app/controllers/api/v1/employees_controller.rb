@@ -1,5 +1,6 @@
 class Api::V1::EmployeesController < ApplicationController
-
+  before_action :restrict_access
+  
   def index
     @employees = Employee.all
   end
@@ -35,6 +36,12 @@ class Api::V1::EmployeesController < ApplicationController
 
   def employee_params
     params.require(:employee).permit(:first_name, :last_name, :email)
+  end
+  
+  def restrict_access
+    authenticate_or_request_with_http_token do |api_key, options|
+      User.find_by(:email => request.headers["X-User-Email"], :api_key => api_key)
+    end
   end
   
 end
