@@ -1,5 +1,22 @@
 Rails.application.routes.draw do
+
+  namespace :api do
+    namespace :v1 do
+      resources :employees
+    end
+
+    namespace :v2 do
+      # routes
+    end
+
+    namespace :v3 do
+      # routes
+    end
+  end
+
   resources :employees
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
